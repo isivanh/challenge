@@ -1,14 +1,11 @@
-export class Item {
-    name: string;
-    sellIn: number;
-    quality: number;
-
-    constructor(name, sellIn, quality) {
-        this.name = name;
-        this.sellIn = sellIn;
-        this.quality = quality;
-    }
-}
+import { ItemBehavior } from "./behavior/item-behavior";
+import { AgedBrieItem } from "./behavior/aged-brie-item";
+import { BackstagePassesItem } from "./behavior/backstage-passes-item";
+import { ConjuredItem } from "./behavior/conjured-item";
+import { NormalItem } from "./behavior/normal-item";
+import { SulfurasItem } from "./behavior/sulfuras-item";
+import { ITEM_TYPES } from "./constants/item-types";
+import { Item } from "./models/item";
 
 export class GildedRose {
     items: Array<Item>;
@@ -16,8 +13,27 @@ export class GildedRose {
     constructor(items = [] as Array<Item>) {
         this.items = items;
     }
-
+    getBehavior(item: Item): ItemBehavior {
+        switch (item.name) {
+            case ITEM_TYPES.AGED_BRIE:
+                return new AgedBrieItem(item);
+            case ITEM_TYPES.BACKSTAGE_PASSES:
+                return new BackstagePassesItem(item);
+            case ITEM_TYPES.SULFURAS:
+                return new SulfurasItem();
+            case ITEM_TYPES.CONJURED:
+                return new ConjuredItem(item);
+            default:
+                return new NormalItem(item);
+        }
+    }
     updateQuality() {
+        for (const item in this.items) {
+            this.getBehavior(this.items[item]).updateItem();
+        }
+        return this.items;
+    }
+    updateQualityLeeroy() {
         for (let i = 0; i < this.items.length; i++) {
             if (this.items[i].name != 'Aged Brie' && this.items[i].name != 'Backstage passes to a TAFKAL80ETC concert') {
                 if (this.items[i].quality > 0) {
@@ -63,7 +79,6 @@ export class GildedRose {
                 }
             }
         }
-
         return this.items;
     }
 }
