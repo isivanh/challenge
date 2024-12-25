@@ -3,20 +3,21 @@
   "version": "1.0.0",
   "description": "Gilded Rose kata in TypeScript",
   "scripts": {
-    "compile": "tsc"
+    "compile": "tsc",
+    "test": "mocha --require ts-node/register 'test/**/*.ts'"
   },
   "license": "MIT",
   "private": true,
   "devDependencies": {
+    "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@types/chai": "~3.5.2",
     "@types/mocha": "~2.2.41",
-    "@types/node": "~7.0.18",
     "chai": "~4.2.0",
-    "mocha": "~8.2.1",
+    "mocha": "^11.0.1",
     "nyc": "~15.1.0",
     "rimraf": "~3.0.2",
     "source-map-support": "0.5.19",
-    "ts-node": "~9.1.1",
+    "ts-node": "^10.9.2",
     "typescript": "~4.1.3"
   },
   "nyc": {
@@ -34,5 +35,11 @@
       "html",
       "text"
     ]
+  },
+  "dependencies": {
+    "module-alias": "^2.2.3"
+  },
+  "_moduleAliases": {
+    "@models": "app/models"
   }
 }

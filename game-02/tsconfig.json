@@ -4,8 +4,21 @@
         "target": "es5",
         "strict": true,
         "noImplicitAny": false,
-        "sourceMap": false
+        "sourceMap": false,
+        "baseUrl": "./",
+        "rootDir": "./",
+        "outDir": "./dist",
+        "paths": {
+            "@models/*": [
+                "app/models/*"
+            ],
+        },
+        "esModuleInterop": true,
     },
+    "include": [
+        "app/**/*",
+        "test/**/*"
+    ],
     "exclude": [
         "node_modules"
     ]
