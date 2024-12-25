@@ -1,3 +1,21 @@
+# Gilded Rose Requirements Solution
+## Assumptions ##
+
+- We assume that the logic of the first version of the code written by Leeroy is correct (though unmaintaneable) and was validated by Allison.
+- Explicit rules in the code will be refactored to improve clarity and maintainability.
+
+## Tests ##
+
+Testing commands:
+- `npm test`: Runs all tests.
+- `npx nyc npm test`: Runs all tests and additionally shows a code coverage report.
+
+## Considerations
+
+- I kept the old codebase from Leeroy on the function `updateQualityLeeroy` so that I can create the first tests which will make sure that even after refactors the output will be the same.
+- This is to emulate a real world environment, where we have to maintain and refactor legacy code without breaking the current functionality and mitigating risks that can bother the end-user.
+- Refactored codebase is located in the function `updateQuality`.
+
 # Gilded Rose Requirements Specification
 
 ## What we need?
